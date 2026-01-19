@@ -3,6 +3,8 @@ package com.kennendy.stockmix.prdutos;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.kennendy.stockmix.estoques.EstoqueModel;
 
 import jakarta.persistence.Column;
@@ -29,6 +31,9 @@ public class ProdutosModel {
     private Long idProduto;
 
     private String nome;
+
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
     private LocalDateTime dataChegada;
 
     @Column(precision = 10, scale = 2)

@@ -27,5 +27,9 @@ public class ProdutosService {
         return produtoId.orElse(null);
     }
 
+    public ProdutosModel cadastrarProduto(ProdutosModel produto){
+        return produtosRepository.save(produto);
+    }
+
 
 }
