@@ -30,17 +30,18 @@ public class ProdutosModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProduto;
 
+    @Column(nullable = false)
     private String nome;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime dataChegada;
 
-    @Column(precision = 10, scale = 2)
+    @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal preco;
 
     //Um produto tem um único estoque.
     @ManyToOne
-    @JoinColumn(name = "estoque_id") //FK
+    @JoinColumn(name = "estoque_id", nullable = false) //FK
     private EstoqueModel estoque;
 }
