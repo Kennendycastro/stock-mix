@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 public class ProdutosService {
     
     private ProdutosRepository produtosRepository;
+    private ProdutosMapper produtosMapper;
 
 
-    public ProdutosService(ProdutosRepository produtosRepository) {
+    public ProdutosService(ProdutosRepository produtosRepository, ProdutosMapper produtosMapper) {
         this.produtosRepository = produtosRepository;
+        this.produtosMapper = produtosMapper;
     }
 
     //Listar 
@@ -29,8 +31,10 @@ public class ProdutosService {
 
     //Cadastrar
 
-    public ProdutosModel cadastrarProduto(ProdutosModel produto){
-        return produtosRepository.save(produto);
+    public ProdutosDTO cadastrarProduto(ProdutosDTO produtoDTO){
+        ProdutosModel produto = produtosMapper.map(produtoDTO);
+        produto = produtosRepository.save(produto);
+        return produtosMapper.map(produto);
     }
 
 

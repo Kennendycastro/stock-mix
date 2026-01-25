@@ -23,7 +23,7 @@ public class ProdutosController {
     // C - CREATE
 
     @PostMapping("/cadastrar")
-    public ProdutosModel cadastrarProduto(@RequestBody ProdutosModel produto) {
+    public ProdutosDTO cadastrarProduto(@RequestBody ProdutosDTO produto) {
 
         return produtosService.cadastrarProduto(produto);
     }
