@@ -40,8 +40,11 @@ public class ProdutosModel {
     @Column(precision = 10, scale = 2, nullable = false)
     private BigDecimal preco;
 
+    @Column(name="quantidade")
+    private Integer quantidade;
+
     //Um produto tem um único estoque.
     @ManyToOne
     @JoinColumn(name = "estoque_id", nullable = false) //FK
-    private EstoqueModel estoque;
+    private EstoqueModel estoque; 
 }
