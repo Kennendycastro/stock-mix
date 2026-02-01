@@ -17,7 +17,7 @@ public class ProdutosDTO {
     private String nome;
     private LocalDateTime dataChegada;
     private BigDecimal preco;
-    private int quantidade;
+    private Integer quantidade;
     private EstoqueModel estoque;
 
     
