@@ -31,19 +31,19 @@ public class ProdutosController {
     // R - READ
 
     @GetMapping("/listar")
-    public List<ProdutosModel> listarPordutos() {
+    public List<ProdutosDTO> listarPordutos() {
         return produtosService.listarPordutos();
     }
 
     @GetMapping("/listar/{id}")
-    public ProdutosModel listarProdutosId(@PathVariable Long id) {
+    public ProdutosDTO listarProdutosId(@PathVariable Long id) {
         return produtosService.listarProdutosId(id);
     }
     
     // U -UPDATE
 
     @PutMapping("/atualizar/{id}")
-    public ProdutosModel atualizarProduto(@PathVariable Long id, @RequestBody ProdutosModel produtoatualizado) {
+    public ProdutosDTO atualizarProduto(@PathVariable Long id, @RequestBody ProdutosDTO produtoatualizado) {
 
         return produtosService.atualizarProduto(id, produtoatualizado);
     }

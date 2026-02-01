@@ -2,6 +2,7 @@ package com.kennendy.stockmix.prdutos;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -18,15 +19,17 @@ public class ProdutosService {
     }
 
     //Listar 
-    public  List<ProdutosModel> listarPordutos(){
-
-        return produtosRepository.findAll();
+    public  List<ProdutosDTO> listarPordutos(){
+        List<ProdutosModel> produtos = produtosRepository.findAll();
+        return produtos.stream()
+            .map(produtosMapper::map)
+            .collect(Collectors.toList());
     }
 
-    public ProdutosModel listarProdutosId(Long id){
+    public ProdutosDTO listarProdutosId(Long id){
 
         Optional<ProdutosModel> produtoId = produtosRepository.findById(id);
-        return produtoId.orElse(null);
+        return produtoId.map(produtosMapper::map).orElse(null);
     }
 
     //Cadastrar
@@ -46,17 +49,15 @@ public class ProdutosService {
 
     }
 
-
     //Atualizar
+    public ProdutosDTO atualizarProduto(Long id, ProdutosDTO produto){
+        Optional<ProdutosModel> produtoExiste = produtosRepository.findById(id);
+        if (produtoExiste.isPresent()) {
 
-    public ProdutosModel atualizarProduto(Long id, ProdutosModel produto){
-
-        if (produtosRepository.existsById(id)) {
-
-            produto.setIdProduto(id);
-            
-            return produtosRepository.save(produto);
-
+            ProdutosModel produtoatualizado = produtosMapper.map(produto);
+            produtoatualizado.setIdProduto(id);
+            ProdutosModel produtoSalvo = produtosRepository.save(produtoatualizado);
+            return produtosMapper.map(produtoSalvo);
             
         }
         return null;
