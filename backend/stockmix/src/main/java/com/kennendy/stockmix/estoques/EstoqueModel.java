@@ -15,11 +15,13 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString
 @Table(name ="tb_estoques")
 public class EstoqueModel {
     

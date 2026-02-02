@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProdutosService {
     
-    private ProdutosRepository produtosRepository;
-    private ProdutosMapper produtosMapper;
+    private final ProdutosRepository produtosRepository;
+    private final ProdutosMapper produtosMapper;
 
 
     public ProdutosService(ProdutosRepository produtosRepository, ProdutosMapper produtosMapper) {

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/produtos")
 public class ProdutosController {
 
-    private ProdutosService produtosService;
+    private final ProdutosService produtosService;
 
     public ProdutosController(ProdutosService produtosService) {
         this.produtosService = produtosService;
