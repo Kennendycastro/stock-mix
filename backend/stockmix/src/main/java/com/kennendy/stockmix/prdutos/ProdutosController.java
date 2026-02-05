@@ -1,11 +1,13 @@
 package com.kennendy.stockmix.prdutos;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -76,7 +78,7 @@ public class ProdutosController {
 
     // U -UPDATE
 
-    @PutMapping("/atualizar/{id}")
+    @PutMapping("atualizar/{id}")
     @Operation(summary = "Atualização de produto.", description = "Atualiza as informações de um porduto pelo seu id")
     public ResponseEntity<?> atualizarProduto(
         @Parameter(description = "O usuário manda o id do produto a ser atualizado no caminho da requisição.")
@@ -85,12 +87,26 @@ public class ProdutosController {
         @RequestBody ProdutosDTO produtoatualizado) {
 
         if (produtosService.listarProdutosId(id) != null) {
-            ProdutosDTO produtoAtualizado = produtosService.atualizarProduto(id, produtoatualizado);
+            ProdutosDTO produtoAtualizado = produtosService.atualizarProduto(id, produtoatualizado); //ve isso depois
             return ResponseEntity.ok(produtoAtualizado);
         }
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body("O produto de ID: " + id + " Não foi encontrado.");
+                .body("O produto de ID: " + id + " não foi encontrado.");
+    }
+
+
+    @PatchMapping("/atualizarParcial/{id}")
+    public ResponseEntity<?> atualizarParcial(@PathVariable Long id, @RequestBody ProdutosDTO Produto){
+        if (produtosService.listarProdutosId(id) != null) {
+            ProdutosDTO produtoDTO = produtosService.atualizarProdutoParcial(id, Produto);
+            return ResponseEntity.ok(produtoDTO);
+            
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body("O produto de ID: "+id+" não foi encontrado.");
+
     }
 
     // D - DELETE
